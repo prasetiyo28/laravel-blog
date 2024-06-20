@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CommentController;
+use Spatie\Permission\Middlewares\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +22,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['role:admin'])->group(function () {
+    Route::resource('posts', BlogPostController::class);
+});
+
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
