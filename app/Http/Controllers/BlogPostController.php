@@ -51,4 +51,64 @@ class BlogPostController extends Controller
         $post = BlogPost::find($id);
         return view('blog_posts.show', compact('post'));
     }
+
+    public function edit($id)
+    {
+        $post = BlogPost::find($id);
+        return view('blog_posts.edit', compact('post'));
+    }
+
+    public function update(Request $request,$id)
+    {
+
+        // echo "jahahahaha";
+        $this->validate($request, [
+            'title' => 'required|string|max:155',
+            'content' => 'required',
+        ]);
+
+        $post = BlogPost::findOrFail($id);
+
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'slug' => str_slug($request->title)
+        ]);
+
+        
+        if ($post) {
+            return redirect()
+                ->route('posts.index')
+                ->with([
+                    'success' => 'Post has been updated successfully'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Some problem has occured, please try again'
+                ]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $post = BlogPost::findOrFail($id);
+        $post->delete();
+
+        if ($post) {
+            return redirect()
+                ->route('posts.index')
+                ->with([
+                    'success' => 'Post has been deleted successfully'
+                ]);
+        } else {
+            return redirect()
+                ->route('posts.index')
+                ->with([
+                    'error' => 'Some problem has occurred, please try again'
+                ]);
+        }
+    }
 }
