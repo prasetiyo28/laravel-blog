@@ -25,14 +25,14 @@ class PermissionDemoSeeder extends Seeder
         Permission::create(['name' => 'delete posts']);
         Permission::create(['name' => 'publish posts']);
         Permission::create(['name' => 'unpublish posts']);
+        Permission::create(['name' => 'create comments']);
 
         //create roles and assign existing permissions
-        $writerRole = Role::create(['name' => 'writer']);
-        $writerRole->givePermissionTo('view posts');
-        $writerRole->givePermissionTo('create posts');
-        $writerRole->givePermissionTo('edit posts');
-        $writerRole->givePermissionTo('delete posts');
-
+        $userRole = Role::create(['name' => 'user']);
+        $userRole->givePermissionTo('view posts');
+        $userRole->givePermissionTo('create comments');
+        
+        
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo('view posts');
         $adminRole->givePermissionTo('create posts');
@@ -46,15 +46,15 @@ class PermissionDemoSeeder extends Seeder
 
         // create demo users
         $user = User::factory()->create([
-            'name' => 'Example user',
-            'email' => 'writer@asfar.com',
+            'name' => 'User Posts',
+            'email' => 'user@asfar.ae',
             'password' => bcrypt('12345678')
         ]);
-        $user->assignRole($writerRole);
+        $user->assignRole($userRole);
 
         $user = User::factory()->create([
-            'name' => 'Example admin user',
-            'email' => 'admin@asfar.com',
+            'name' => 'Admin Asfar',
+            'email' => 'admin@asfar.ae',
             'password' => bcrypt('12345678')
         ]);
         $user->assignRole($adminRole);
