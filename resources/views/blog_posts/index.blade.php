@@ -14,12 +14,16 @@
                             <p class="card-text">{{ \Illuminate\Support\Str::limit($post->content, 200, $end='...') }}</p>
                             <p class="card-text"><small class="text-muted">Published on {{ $post->created_at->format('M d, Y') }}</small></p>
                             <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Read more</a>
+                            @can('edit posts')
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                            @endcan
+                            @can('delete posts')
                             <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
                             </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
