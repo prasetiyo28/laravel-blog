@@ -22,8 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin'])->group(function () {
+// Route::middleware(['role:admin,user'])->group(function () {
     Route::resource('posts', BlogPostController::class);
-});
+// });
+
+
 
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
