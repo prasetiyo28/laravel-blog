@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\Api\BlogPostAPIController;
 use App\Http\Controllers\CommentController;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 
@@ -29,3 +30,7 @@ Auth::routes();
 
 
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+
+
+Route::get('/api/posts', [BlogPostAPIController::class, 'index']);
