@@ -110,4 +110,4 @@ Manage users (optional).
 - Middleware: Use middleware to manage access control based on user roles.
 
 **API**
-- postman collection 
+- postman collection [link]([doc:linking-to-pages#anchor-links](https://github.com/prasetiyo28/laravel-blog/blob/46d34a470348a66fee984eba2ccf5f3b548c5d14/Blog.postman_collection.json))
