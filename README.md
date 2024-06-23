@@ -1,4 +1,4 @@
-# Laravel 10 Project README
+# Blogs
 
 This README provides instructions for setting up and running the Laravel 10 project with user authentication and different roles (admin and user).
 
